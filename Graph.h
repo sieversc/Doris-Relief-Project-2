@@ -12,10 +12,25 @@ class Graph{
 
 		/***********************************************************
 		Default constructor for the graph class
+			*creates an empty adjacency matrix
 		**********************************************************/
-		Graph();
+		Graph(int n);
 
 		~Graph();
+
+		/***********************************************************
+		local variables
+		************************************************************/
+
+		int **adjmat;
+
+		int length;
+
+		void createMatrix(int length);
+
+		void addEdge(int startNode, int endNode, int weight);
+
+		void displayMatrix();
 
 	private:
 

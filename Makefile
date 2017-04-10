@@ -1,4 +1,4 @@
-SRCS = Graph.h Node.h
+SRCS = Graph.cpp TestDriver.cpp
 EXEC = graph
 
 OBJS = $(SRCS:.C=.o)
