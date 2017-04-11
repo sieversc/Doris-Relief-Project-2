@@ -5,17 +5,19 @@
 
 int main(){
 
-	Graph *test = new Graph(4);
+	Graph *test = new Graph(5);
 
 	test -> addEdge(0, 1, 4);
 
 	test -> addEdge(0, 2, 8);
 
-	test -> addEdge(1, 2, 6);
+	test -> addEdge(1, 2, 1);
 
 	test -> addEdge(1, 3, 6);
 
 	test -> addEdge(2, 3, 1);
+
+	test -> addEdge(2, 4, 22);
 
 	test->displayMatrix();
 
