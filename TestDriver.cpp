@@ -5,7 +5,7 @@
 
 int main(){
 
-	Graph *test = new Graph(5);
+	Graph *test = new Graph(4);
 
 	test -> addEdge(0, 1, 4);
 
@@ -13,7 +13,13 @@ int main(){
 
 	test -> addEdge(1, 2, 6);
 
+	test -> addEdge(1, 3, 6);
+
+	test -> addEdge(2, 3, 1);
+
 	test->displayMatrix();
+
+	test -> dijkstra(0);
 
 	return(0);
 }
