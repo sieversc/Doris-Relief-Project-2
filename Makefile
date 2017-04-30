@@ -1,5 +1,5 @@
-SRCS = Graph.cpp TestDriver.cpp
-EXEC = graph
+SRCS = Graph.cpp Adjlist.cpp TestDriver.cpp MinHeap.cpp
+EXEC = test
 
 OBJS = $(SRCS:.C=.o)
 

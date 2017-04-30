@@ -1,57 +1,27 @@
+
 #ifndef _Graph_H
 #define _Graph_H
 
-#include <string>
-#include <iostream>
-#include <set>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include "Adjlist.h"
 
+class Graph
+{
+public:
+	Graph(int v);
+	~Graph();
+	
+	int size;
+	AdjList* array;
 
-class Graph{
+	void createGraph(int v);
 
-	public:
+	void  addEdge(int src, int dest, int weight);
 
-		/***********************************************************
-			Default constructor for the graph class
-				*creates an empty adjacency matrix
-		**********************************************************/
-		Graph(int n);
-
-		~Graph();
-
-		/***********************************************************
-			local variables
-		************************************************************/
-
-		int **adjmat;
-
-		int length;
-
-
-		/************************************************************
-			Creates an empty adjacency matrix of side dimensions length x length
-				*assigns 0 weight to each nodes distance to itself
-				* assigns -1 weight if two nodes are not connected
-		************************************************************/
-		void createMatrix(int length);
-
-		/************************************************************
-			connects startNode to Endnode and assigns a weight
-		************************************************************/
-		void addEdge(int startNode, int endNode, int weight);
-
-		/************************************************************
-			prints out every element in the n x n array in a grid
-		************************************************************/
-		void displayMatrix();
-
-		void dijkstra(int source);
-
-	private:
-
-		int findMin(int distance[], bool visited[]);
-
-		void printDijkstra(int distance[]);
+	void printAdjList();
 };
+
 
 #endif
