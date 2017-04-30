@@ -6,6 +6,7 @@
 #include <set>
 using namespace std;
 
+
 class Graph{
 
 	public:
@@ -28,7 +29,7 @@ class Graph{
 
 
 		/************************************************************
-			Creates an empty adjacency matrix of side dimensions n x n
+			Creates an empty adjacency matrix of side dimensions length x length
 				*assigns 0 weight to each nodes distance to itself
 				* assigns -1 weight if two nodes are not connected
 		************************************************************/

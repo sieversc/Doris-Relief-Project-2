@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <limits.h>
+#include <vector>
 
 Graph::Graph(int n){
 	createMatrix(n);
@@ -83,6 +84,7 @@ void Graph::dijkstra(int source){
 
 	int distance[length];
 	bool visited[length];
+	vector<int> path[length];
 
 	for(int i=0; i<length; i++){
 		distance[i] = INT_MAX;
@@ -98,6 +100,7 @@ void Graph::dijkstra(int source){
 		for(int v=0; v<length; v++){
 			if(!visited[v] && adjmat[u][v] && adjmat[u][v] != -1 && distance[u] != INT_MAX && distance[u] + adjmat[u][v] < distance[v]){
 				distance[v] = distance [u] + adjmat[u][v];
+				path[v].insert(u);
 			}
 
 		}
