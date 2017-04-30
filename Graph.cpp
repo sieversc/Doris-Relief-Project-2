@@ -1,50 +1,111 @@
 #include "Graph.h"
-#include "Adjlist.h"
-
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <string>
 #include <limits.h>
-using namespace std;
+#include <vector>
 
+Graph::Graph(int n){
+	createMatrix(n);
+}
 
-//Create a graph with v vertices
-Graph::Graph(int v)
-{
-	size = v;
-	array = new AdjList[v];
+Graph::~Graph(){
 
-	for (int i = 0; i < v; ++i){
-        array[i].head = NULL;
+}
+
+void Graph::createMatrix(int length){
+
+	this->length = length;
+
+	adjmat = new int* [length];
+
+	for(int i = 0; i < length; i++){
+
+		adjmat[i] = new int [length];
+
+		for(int j = 0; j < length; j++){
+			adjmat[i][j] = -1;
+			if(i==j){
+				adjmat[i][j] = 0;
+			}
+		}
 	}
 }
 
-Graph::~Graph()
-{
+void Graph::addEdge(int start, int end, int weight){
 
+	if(start < 0 || end < 0 || weight < 0 || start > length || end > length){
+		cout << "Enter positive values\n";
+	}
+
+	else{
+		adjmat[start][end] = weight;
+		adjmat[end][start] = weight;
+	}
 }
 
-void Graph::addEdge(int src, int dest, int weight)
-{
-	struct AdjListNode* newNode = array[src].newAdjListNode(dest, weight);
-	newNode -> next = array[src].head;
-	array[src].head = newNode;
+void Graph::displayMatrix(){
+	int i,j;
 
-	newNode = array[dest].newAdjListNode(src, weight);
-	newNode->next = array[dest].head;
-	array[dest].head = newNode;
+	cout << endl << "__________________________________________________________\n";
+	for(i=0; i<length; i++){
+		for(j=0; j<length; j++){
+			cout << adjmat[i][j] << "	 ";
+		}
+		cout << " |" << endl;
+	}
+
+	cout << "__________________________________________________________\n" << endl;
 }
 
-void Graph::printAdjList()
-{
-	cout << "Vertex		Neighbors" << endl;
-	for(int i = 0; i < size; i++){
-		cout << i << "\t\t";
-		array[i].printList();
-		
-		cout << endl;
+int Graph::findMin(int distance[], bool visited[]){
+	int minimum[2] = {INT_MAX};
+	int min = INT_MAX;
+	int index = INT_MAX;
+
+	for(int i=0; i<length; i++){
+		if(visited[i] == false && distance[i] <= min){
+			min = distance[i];
+			index = i;
+		}
+	}
+
+	return index;
+}
+
+void Graph::printDijkstra(int distance[]){
+	cout << "Vertex		Distance from Source" << endl;
+	for(int i=0; i<length; i++){
+		cout << i << "			" << distance[i] << endl;
+	}
+}
+
+void Graph::dijkstra(int source){
+
+	int distance[length];
+	bool visited[length];
+	vector<int> path[length];
+
+	for(int i=0; i<length; i++){
+		distance[i] = INT_MAX;
+		visited[i] = false;
+	}
+	
+	distance[source] = 0;
+
+	for(int count=0; count<length-1; count++){
+		int u = findMin(distance, visited);
+		visited[u] = true;
+
+		for(int v=0; v<length; v++){
+			if(!visited[v] && adjmat[u][v] && adjmat[u][v] != -1 && distance[u] != INT_MAX && distance[u] + adjmat[u][v] < distance[v]){
+				distance[v] = distance [u] + adjmat[u][v];
+				path[v].insert(u);
+			}
+
+		}
 
 	}
 
-
+	printDijkstra(distance);
 }
